@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -20,12 +21,16 @@ public class Topics {
     private Long id;
     private String titulo;
     private String mensaje;
+    @Column(updatable = false, nullable = false)
+    @CreationTimestamp
     private LocalDateTime fechaCreacion;
+    private Long autor_id;
+
 
     public Topics (DatosRegistroTopic datos) {
         this.id = null;
         this.titulo = datos.titulo();
         this.mensaje = datos.mensaje();
-        this.fechaCreacion = LocalDateTime.now();
+        this.autor_id = datos.autor_id();
     }
 }

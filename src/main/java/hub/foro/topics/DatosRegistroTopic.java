@@ -6,6 +6,7 @@ public record DatosRegistroTopic(
         @NotBlank
         String titulo,
         @NotBlank
-        String mensaje
+        String mensaje,
+        Long autor_id
 ) {
 }
