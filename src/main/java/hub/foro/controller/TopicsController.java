@@ -5,6 +5,7 @@ import hub.foro.topics.Topics;
 import hub.foro.topics.TopicsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
@@ -31,4 +32,13 @@ public class TopicsController {
                 .sorted(Comparator.comparing(DatosRegistroTopic::fechaCreacion).reversed())
                 .toList();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosRegistroTopic> buscar(@PathVariable Long id){
+        Topics topics;
+        topics = topicsRepository.getReferenceById(id);
+        var datosTopics = new DatosRegistroTopic(topics.getTitulo(), topics.getMensaje(), topics.getAutor_id(), topics.getFechaCreacion());
+        return ResponseEntity.ok(new DatosRegistroTopic(topics));
+    }
+
 }
