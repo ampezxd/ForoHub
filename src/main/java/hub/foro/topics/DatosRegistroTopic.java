@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public record DatosRegistroTopic(
+        Long id,
         @NotBlank
         String titulo,
         @NotBlank
@@ -14,6 +15,6 @@ public record DatosRegistroTopic(
 ) {
 
         public DatosRegistroTopic (Topics topics) {
-                this(topics.getTitulo(), topics.getMensaje(), topics.getAutor_id(), topics.getFechaCreacion());
+                this(topics.getId(), topics.getTitulo(), topics.getMensaje(), topics.getAutor_id(), topics.getFechaCreacion());
         }
 }

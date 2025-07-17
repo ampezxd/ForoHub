@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Comparator;
 import java.util.List;
@@ -24,8 +25,13 @@ public class TopicsController {
 
     @Transactional
     @PostMapping
-    public void registrar (@RequestBody @Valid DatosRegistroTopic datos) {
-        topicsRepository.save(new Topics(datos));
+    public ResponseEntity registrar (@RequestBody @Valid DatosRegistroTopic datos, UriComponentsBuilder uriBuilder) {
+        var topics = new Topics(datos);
+        topicsRepository.save(topics);
+
+        var uri = uriBuilder.path("/topics/{id}").buildAndExpand(topics.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DatosActualizacionTopic(topics));
     }
 
     @GetMapping
@@ -40,19 +46,22 @@ public class TopicsController {
     public ResponseEntity<DatosRegistroTopic> buscar(@PathVariable Long id){
         Topics topics;
         topics = topicsRepository.getReferenceById(id);
-        var datosTopics = new DatosRegistroTopic(topics.getTitulo(), topics.getMensaje(), topics.getAutor_id(), topics.getFechaCreacion());
+        var datosTopics = new DatosRegistroTopic(topics.getId(), topics.getTitulo(), topics.getMensaje(), topics.getAutor_id(), topics.getFechaCreacion());
         return ResponseEntity.ok(new DatosRegistroTopic(topics));
     }
 
     @Transactional
     @PutMapping
-    public void actualizar(@RequestBody @Valid DatosActualizacionTopic datos){
+    public ResponseEntity actualizar(@RequestBody @Valid DatosActualizacionTopic datos){
         var topic = topicsRepository.getReferenceById(datos.id()); // Así optenemos el topico de la base de datos mediante el id
         topic.actualizarInformacion(datos); //metodo para actualizar informacion del tópico
+
+        return  ResponseEntity.ok(new DatosActualizacionTopic(topic));
     }
 
     @Transactional
     @DeleteMapping("/{id}")
+    //Se utiliza el responseEntity para devolver diferentes codigos http
     public ResponseEntity <Void> eliminar(@PathVariable Long id){
         Optional<Topics> topicsOptional = topicsRepository.findById(id);
         //Utilizacion del optional para manejar mejor los errores
@@ -63,5 +72,4 @@ public class TopicsController {
             return ResponseEntity.notFound().build();
         }
     }
-
 } 

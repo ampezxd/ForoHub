@@ -7,5 +7,10 @@ public record DatosActualizacionTopic(
         String titulo,
         String mensaje
 ) {
-
+    public DatosActualizacionTopic(Topics topics){
+        this(topics.getId(),
+                topics.getTitulo(),
+                topics.getMensaje()
+        );
+    }
 }
