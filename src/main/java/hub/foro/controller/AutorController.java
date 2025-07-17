@@ -1,9 +1,9 @@
 package hub.foro.controller;
 
 
-import hub.foro.autor.Autor;
-import hub.foro.autor.AutorRepository;
-import hub.foro.autor.DatosRegistroAutor;
+import hub.foro.domain.autor.Autor;
+import hub.foro.domain.autor.AutorRepository;
+import hub.foro.domain.autor.DatosRegistroAutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;

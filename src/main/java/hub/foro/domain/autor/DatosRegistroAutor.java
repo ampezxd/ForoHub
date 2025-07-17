@@ -1,4 +1,4 @@
-package hub.foro.autor;
+package hub.foro.domain.autor;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

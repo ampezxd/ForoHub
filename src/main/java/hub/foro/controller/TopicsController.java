@@ -1,9 +1,9 @@
 package hub.foro.controller;
 
-import hub.foro.topics.DatosActualizacionTopic;
-import hub.foro.topics.DatosRegistroTopic;
-import hub.foro.topics.Topics;
-import hub.foro.topics.TopicsRepository;
+import hub.foro.domain.topics.DatosActualizacionTopic;
+import hub.foro.domain.topics.DatosRegistroTopic;
+import hub.foro.domain.topics.Topics;
+import hub.foro.domain.topics.TopicsRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package hub.foro.autor;
+package hub.foro.domain.autor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

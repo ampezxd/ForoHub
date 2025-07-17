@@ -1,4 +1,4 @@
-package hub.foro.topics;
+package hub.foro.domain.topics;
 
 import jakarta.validation.constraints.NotNull;
 
