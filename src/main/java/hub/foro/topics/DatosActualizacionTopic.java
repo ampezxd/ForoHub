@@ -1,7 +1,9 @@
 package hub.foro.topics;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DatosActualizacionTopic(
-        Long id,
+        @NotNull Long id,
         String titulo,
         String mensaje
 ) {

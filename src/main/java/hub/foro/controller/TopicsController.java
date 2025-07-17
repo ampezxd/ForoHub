@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topics")
@@ -50,7 +51,17 @@ public class TopicsController {
         topic.actualizarInformacion(datos); //metodo para actualizar informacion del tópico
     }
 
-    @DeleteMapping
-    public void eliminar(@PathVariable Long id){}
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity <Void> eliminar(@PathVariable Long id){
+        Optional<Topics> topicsOptional = topicsRepository.findById(id);
+        //Utilizacion del optional para manejar mejor los errores
+        if (topicsOptional.isPresent()) {
+            topicsRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 } 
