@@ -1,9 +1,11 @@
 package hub.foro.controller;
 
+import hub.foro.topics.DatosActualizacionTopic;
 import hub.foro.topics.DatosRegistroTopic;
 import hub.foro.topics.Topics;
 import hub.foro.topics.TopicsRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class TopicsController {
 
     @Transactional
     @PostMapping
-    public void registrar (@RequestBody DatosRegistroTopic datos) {
+    public void registrar (@RequestBody @Valid DatosRegistroTopic datos) {
         topicsRepository.save(new Topics(datos));
     }
 
@@ -41,4 +43,14 @@ public class TopicsController {
         return ResponseEntity.ok(new DatosRegistroTopic(topics));
     }
 
-}
+    @Transactional
+    @PutMapping
+    public void actualizar(@RequestBody @Valid DatosActualizacionTopic datos){
+        var topic = topicsRepository.getReferenceById(datos.id()); // Así optenemos el topico de la base de datos mediante el id
+        topic.actualizarInformacion(datos); //metodo para actualizar informacion del tópico
+    }
+
+    @DeleteMapping
+    public void eliminar(@PathVariable Long id){}
+
+} 

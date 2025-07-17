@@ -1,6 +1,7 @@
 package hub.foro.topics;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,14 @@ public class Topics {
         this.titulo = datos.titulo();
         this.mensaje = datos.mensaje();
         this.autor_id = datos.autor_id();
+    }
+
+    public void actualizarInformacion(@Valid DatosActualizacionTopic datos) {
+        if (datos.titulo() != null) {
+            this.titulo = datos.titulo();
+        }
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
     }
 }
