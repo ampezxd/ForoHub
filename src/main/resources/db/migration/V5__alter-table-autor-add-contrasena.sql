@@ -1,0 +1,1 @@
+alter table autor add contrasena varchar(300) not null;
