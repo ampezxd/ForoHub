@@ -2,6 +2,7 @@ package hub.foro.domain.autor;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,5 +28,15 @@ public class Autor {
         this.id = null;
         this.nombre = datos.nombre();
         this.email = datos.email();
+    }
+
+    //Con este metodo se cambian los valores que el usuario indique mediante la request
+    public void ActualizarInformacion(@Valid DatosActualizacionAutor datos) {
+        if (datos.nombre() != null){
+            this.nombre = datos.nombre();
+        }
+        if (datos.email() != null){
+            this.email = datos.email();
+        }
     }
 }
