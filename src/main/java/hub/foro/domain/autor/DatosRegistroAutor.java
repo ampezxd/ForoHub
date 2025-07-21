@@ -10,4 +10,7 @@ public record DatosRegistroAutor(
         @Email
         String email
 ) {
+       public DatosRegistroAutor (Autor autor){
+                this(autor.getNombre(), autor.getEmail());
+       }
 }
