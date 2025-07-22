@@ -1,6 +1,8 @@
 **ForoHub API** 💬
 
-API ForoHub es una API RESTful construida con Java y Spring Boot, diseñada para gestionar tópicos en un sistema de foro. Implementa un sistema de autenticación y autorización robusto utilizando Spring Security y JSON Web Tokens (JWT), garantizando que solo los usuarios autenticados puedan interactuar con los recursos del foro.
+API ForoHub es una API RESTful construida con Java y Spring Boot, diseñada para gestionar tópicos en un sistema de foro. 
+Implementa un sistema de autenticación y autorización robusto utilizando Spring Security y JSON Web Tokens (JWT), 
+garantizando que solo los usuarios autenticados puedan interactuar con los recursos del foro.
 
 
 🌟 **Características Principales**
