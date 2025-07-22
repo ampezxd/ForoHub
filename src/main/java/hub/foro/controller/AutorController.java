@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/autor")
@@ -45,4 +46,18 @@ public class AutorController {
 
         return ResponseEntity.ok(new DatosActualizacionAutor(autor));
     }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity <Void> eliminar(@PathVariable Long id){
+        Optional <Autor> autorOptional = autorRepository.findById(id);
+        if (autorOptional.isPresent()){
+            autorRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }
